@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="drawingT.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.78840488"
+     inkscape:cx="397.00414"
+     inkscape:cy="609.45843"
+     inkscape:window-width="1920"
+     inkscape:window-height="1166"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <rect
+       x="178.84212"
+       y="163.62151"
+       width="625.31323"
+       height="966.50848"
+       id="rect1" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text1"
+       style="font-size:1000px;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#158000;stroke-width:1.00157"><tspan
+         x="178.8418"
+         y="2017.7517"
+         id="tspan5"><tspan
+           style="font-size:800px"
+           id="tspan4">S</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:211.667px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;white-space:pre;inline-size:89.4296;display:inline;fill:#158000;stroke-width:0.264999"
+       x="126.85424"
+       y="113.7661"
+       id="text2"><tspan
+         x="126.85424"
+         y="113.7661"
+         id="tspan7"><tspan
+           style="stroke-width:0.265"
+           id="tspan6">S</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:211.667px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;white-space:pre;inline-size:140.104;display:inline;fill:#158000;stroke-width:0.264999"
+       x="32.552544"
+       y="257.06442"
+       id="text3"><tspan
+         x="32.552544"
+         y="257.06442"
+         id="tspan9"><tspan
+           style="font-family:'Berlin Sans FB';-inkscape-font-specification:'Berlin Sans FB';fill:#1f0080;stroke-width:0.265"
+           id="tspan8">T</tspan></tspan></text>
+  </g>
+</svg>

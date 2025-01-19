@@ -9,200 +9,175 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        header {
-            background-color: #6200ea;
-            color: white;
-            padding: 1rem;
             text-align: center;
+            background-color: #f9f9f9;
         }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
+        h1 {
+            color: #ff6f00;
+        }
+        .game-container {
+            margin: 50px auto;
+            width: 70%;
+            background-color: #fff;
+            border-radius: 10px;
             padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .about-me {
-            text-align: center;
-        }
-        .about-me img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
+        .letters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
             margin-bottom: 20px;
         }
-        .game-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
+        .letter {
+            width: 70px;
+            height: 70px;
         }
-        .game-link button {
-            background-color: #6200ea;
-            color: white;
-            border: none;
+        .letter img {
+            width: 100%;
+            height: 100%;
+            visibility: hidden;
+        }
+        .input-container {
+            margin: 20px 0;
+        }
+        .input-container input {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+            margin-right: 10px;
+        }
+        .input-container button {
             padding: 10px 20px;
             font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .game-link button:hover {
-            background-color: #3700b3;
-        }
-        .game {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .lives, .score {
-            margin-bottom: 10px;
-        }
-        .input-section input {
-            padding: 10px;
-            font-size: 16px;
-        }
-        .input-section button {
-            margin-left: 10px;
-            background-color: #6200ea;
-            color: white;
+            background-color: #ff6f00;
+            color: #fff;
             border: none;
-            padding: 10px;
-            cursor: pointer;
             border-radius: 5px;
+            cursor: pointer;
         }
-        .cards {
+        .input-container button:hover {
+            background-color: #e65a00;
+        }
+        .status {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .status div {
+            font-size: 18px;
+        }
+        .hearts {
+            color: red;
+        }
+        .reset-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             margin-top: 20px;
         }
-        .card {
-            width: 50px;
-            height: 70px;
-            background: #ddd;
-            margin: 0 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-        .hidden {
-            background: #6200ea;
-            color: #6200ea;
+        .reset-btn:hover {
+            background-color: #333;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Word Prediction Game</h1>
-    </header>
+    <div class="game-container">
+        <h1>Word Prediction Game</h1>
 
-    <!-- Homepage Section -->
-    <div class="container">
-        <section class="about-me">
-            <h2>About Me</h2>
-            <img src="https://via.placeholder.com/150" alt="Profile Picture">
-            <p>Hello! My name is [Your Name]. I'm a student with a passion for coding and problem-solving.</p>
-            <p>Academic Interests: Web development, data science, and artificial intelligence.</p>
-            <div class="game-link">
-                <button onclick="startGame()">Play the Word Prediction Game</button>
-            </div>
-        </section>
+        <div class="letters">
+            <div class="letter" id="letter1"><img src="drawingS.svg" alt="S"></div>
+            <div class="letter" id="letter2"><img src="drawingT.svg" alt="T"></div>
+            <div class="letter" id="letter3"><img src="drawingO.svg" alt="O"></div>
+            <div class="letter" id="letter4"><img src="drawingC.svg" alt="C"></div>
+            <div class="letter" id="letter5"><img src="drawingK.svg" alt="K"></div>
+        </div>
 
-        <!-- Game Section -->
-        <section class="game" id="game" style="display: none;">
-            <h2>Word Prediction Game</h2>
-            <div class="score">Score: <span id="score">0</span></div>
-            <div class="lives">Lives: <span id="lives">3</span></div>
-            <div class="input-section">
-                <input type="text" id="guess" placeholder="Enter a letter or word">
-                <button onclick="makeGuess()">Submit</button>
-                <button onclick="resetGame()">Reset Game</button>
-            </div>
-            <div class="cards" id="cards">
-                <!-- Cards will be dynamically generated -->
-            </div>
-        </section>
+        <div class="input-container">
+            <input type="text" id="prediction" placeholder="Enter letter or word">
+            <button onclick="submitPrediction()">Submit</button>
+        </div>
+
+        <div class="status">
+            <div>Score: <span id="score">0</span></div>
+            <div>Lives: <span id="lives" class="hearts">❤❤❤</span></div>
+        </div>
+
+        <button class="reset-btn" onclick="resetGame()">Reset the Game</button>
     </div>
 
     <script>
-        const word = "STOCK";
-        let lives = 3;
+        const word = "STOCK"; // Word based on student ID
         let score = 0;
-        let guessedLetters = [];
+        let lives = 3;
+        let revealed = [false, false, false, false, false];
 
-        function startGame() {
-            document.querySelector('.about-me').style.display = 'none';
-            document.getElementById('game').style.display = 'block';
-            initializeGame();
-        }
-
-        function initializeGame() {
-            lives = 3;
-            score = 0;
-            guessedLetters = [];
-            document.getElementById('score').textContent = score;
-            document.getElementById('lives').textContent = lives;
-            const cardsContainer = document.getElementById('cards');
-            cardsContainer.innerHTML = '';
+        function updateDisplay() {
             for (let i = 0; i < word.length; i++) {
-                const card = document.createElement('div');
-                card.className = 'card hidden';
-                card.textContent = word[i];
-                cardsContainer.appendChild(card);
-            }
-        }
-
-        function makeGuess() {
-            const guess = document.getElementById('guess').value.toUpperCase();
-            document.getElementById('guess').value = '';
-
-            if (guess.length === 1) {
-                if (word.includes(guess)) {
-                    score += 20;
-                    guessedLetters.push(guess);
-                    revealLetters(guess);
+                const letterDiv = document.getElementById(`letter${i + 1}`);
+                if (revealed[i]) {
+                    letterDiv.querySelector("img").style.visibility = "visible";
                 } else {
-                    lives -= 1;
+                    letterDiv.querySelector("img").style.visibility = "hidden";
                 }
-            } else if (guess === word) {
-                score += 100;
-                alert("You won!");
-                return;
-            } else {
-                lives = 0;
             }
-
-            updateGameState();
+            document.getElementById("score").innerText = score;
+            document.getElementById("lives").innerHTML = "❤".repeat(lives);
         }
 
-        function revealLetters(letter) {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach((card, index) => {
-                if (word[index] === letter) {
-                    card.classList.remove('hidden');
+        function submitPrediction() {
+            const input = document.getElementById("prediction").value.toUpperCase();
+            if (!input) return;
+
+            if (input.length === 1) {
+                // Single letter prediction
+                let correct = false;
+                for (let i = 0; i < word.length; i++) {
+                    if (word[i] === input && !revealed[i]) {
+                        revealed[i] = true;
+                        correct = true;
+                    }
                 }
-            });
-        }
-
-        function updateGameState() {
-            document.getElementById('score').textContent = score;
-            document.getElementById('lives').textContent = lives;
+                if (correct) {
+                    score += 20;
+                } else {
+                    lives--;
+                }
+            } else {
+                // Full word prediction
+                if (input === word) {
+                    score += 100;
+                    alert("You win!");
+                    return;
+                } else {
+                    lives = 0;
+                }
+            }
 
             if (lives <= 0) {
-                alert("You lost!");
-                resetGame();
-            } else if (guessedLetters.length === new Set(word).size) {
-                alert("You won!");
+                alert("You lose! The word was " + word);
             }
+
+            if (revealed.every(v => v)) {
+                alert("You win! The word is " + word);
+            }
+
+            updateDisplay();
         }
 
         function resetGame() {
-            initializeGame();
+            score = 0;
+            lives = 3;
+            revealed = [false, false, false, false, false];
+            updateDisplay();
         }
+
+        // Initialize display
+        updateDisplay();
     </script>
 </body>
 </html>
