@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Prediction Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #6200ea;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .about-me {
+            text-align: center;
+        }
+        .about-me img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .game-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .game-link button {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .game-link button:hover {
+            background-color: #3700b3;
+        }
+        .game {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .lives, .score {
+            margin-bottom: 10px;
+        }
+        .input-section input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .input-section button {
+            margin-left: 10px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .cards {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .card {
+            width: 50px;
+            height: 70px;
+            background: #ddd;
+            margin: 0 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .hidden {
+            background: #6200ea;
+            color: #6200ea;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Word Prediction Game</h1>
+    </header>
+
+    <!-- Homepage Section -->
+    <div class="container">
+        <section class="about-me">
+            <h2>About Me</h2>
+            <img src="https://via.placeholder.com/150" alt="Profile Picture">
+            <p>Hello! My name is [Your Name]. I'm a student with a passion for coding and problem-solving.</p>
+            <p>Academic Interests: Web development, data science, and artificial intelligence.</p>
+            <div class="game-link">
+                <button onclick="startGame()">Play the Word Prediction Game</button>
+            </div>
+        </section>
+
+        <!-- Game Section -->
+        <section class="game" id="game" style="display: none;">
+            <h2>Word Prediction Game</h2>
+            <div class="score">Score: <span id="score">0</span></div>
+            <div class="lives">Lives: <span id="lives">3</span></div>
+            <div class="input-section">
+                <input type="text" id="guess" placeholder="Enter a letter or word">
+                <button onclick="makeGuess()">Submit</button>
+                <button onclick="resetGame()">Reset Game</button>
+            </div>
+            <div class="cards" id="cards">
+                <!-- Cards will be dynamically generated -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const word = "STOCK";
+        let lives = 3;
+        let score = 0;
+        let guessedLetters = [];
+
+        function startGame() {
+            document.querySelector('.about-me').style.display = 'none';
+            document.getElementById('game').style.display = 'block';
+            initializeGame();
+        }
+
+        function initializeGame() {
+            lives = 3;
+            score = 0;
+            guessedLetters = [];
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+            const cardsContainer = document.getElementById('cards');
+            cardsContainer.innerHTML = '';
+            for (let i = 0; i < word.length; i++) {
+                const card = document.createElement('div');
+                card.className = 'card hidden';
+                card.textContent = word[i];
+                cardsContainer.appendChild(card);
+            }
+        }
+
+        function makeGuess() {
+            const guess = document.getElementById('guess').value.toUpperCase();
+            document.getElementById('guess').value = '';
+
+            if (guess.length === 1) {
+                if (word.includes(guess)) {
+                    score += 20;
+                    guessedLetters.push(guess);
+                    revealLetters(guess);
+                } else {
+                    lives -= 1;
+                }
+            } else if (guess === word) {
+                score += 100;
+                alert("You won!");
+                return;
+            } else {
+                lives = 0;
+            }
+
+            updateGameState();
+        }
+
+        function revealLetters(letter) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                if (word[index] === letter) {
+                    card.classList.remove('hidden');
+                }
+            });
+        }
+
+        function updateGameState() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = lives;
+
+            if (lives <= 0) {
+                alert("You lost!");
+                resetGame();
+            } else if (guessedLetters.length === new Set(word).size) {
+                alert("You won!");
+            }
+        }
+
+        function resetGame() {
+            initializeGame();
+        }
+    </script>
+</body>
+</html>
